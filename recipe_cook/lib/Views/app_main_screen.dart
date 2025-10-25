@@ -1,6 +1,7 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:recipe_cook/Untils/constants.dart';
+import 'package:recipe_cook/Views/my_app_home_screen.dart';
 
 class AppMainScreen extends StatefulWidget {
   const AppMainScreen({super.key});
@@ -14,10 +15,16 @@ class _AppMainScreenState extends State<AppMainScreen> {
   late final List<Widget> page;
   @override
   void initState() {
-
+    page = [
+      const MyAppHomeScreen(),
+      navBarPage(Iconsax.heart5),
+      navBarPage(Iconsax.calendar5),
+      navBarPage(Iconsax.setting_21),
+    ];
 
     super.initState();
   }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
@@ -31,28 +38,24 @@ class _AppMainScreenState extends State<AppMainScreen> {
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: TextStyle(
           color: kprimaryColor,
-          fontWeight: FontWeight.w600
+          fontWeight: FontWeight.w600,
         ),
         unselectedLabelStyle: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
-        onTap: (value){
+        onTap: (value) {
           setState(() {
             selectedIndex = value;
           });
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(
-              selectedIndex == 0 ? Iconsax.home5 : Iconsax.home_1,
-            ),
+            icon: Icon(selectedIndex == 0 ? Iconsax.home5 : Iconsax.home_1),
             label: "Home",
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-              selectedIndex == 1 ? Iconsax.heart5 : Iconsax.heart,
-            ),
+            icon: Icon(selectedIndex == 1 ? Iconsax.heart5 : Iconsax.heart),
             label: "Favorite",
           ),
           BottomNavigationBarItem(
@@ -69,15 +72,11 @@ class _AppMainScreenState extends State<AppMainScreen> {
           ),
         ],
       ),
+      body: page[selectedIndex],
     );
   }
-  navBarPage(iconName){
-    return Center(
-      child: Icon(
-        iconName, 
-        size: 100, 
-        color: kprimaryColor,
-      ),
-    );
+
+  navBarPage(iconName) {
+    return Center(child: Icon(iconName, size: 100, color: kprimaryColor));
   }
 }
