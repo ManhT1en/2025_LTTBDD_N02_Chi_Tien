@@ -12,6 +12,8 @@ class MyAppHomeScreen extends StatefulWidget {
 }
 
 class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
+  String category = "All";
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +26,26 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     headerParts(),
                     mySearchBar(),
                     //for banner
-                    BannertoExplore()
+                    const BannertoExplore(),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 20
+                        ),
+                        child: Text(
+                          "Categories",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    //for category
+
                   ],
                 ),
               )
