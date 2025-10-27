@@ -9,42 +9,122 @@ class FoodItemsDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-
-      },
+      onTap: () {},
       child: Container(
-        margin: EdgeInsets.only(right: 10), 
-        width: 230, 
+        margin: EdgeInsets.only(right: 10),
+        width: 230,
         child: Stack(
           children: [
-            Container(
-              width: double.infinity, 
-              height: 160, 
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), 
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    documentSnapshot['image'] //image từ firestore
-                  ), 
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  width: double.infinity,
+                  height: 160,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.grey[200],
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: Image.network(
+                      documentSnapshot['image'],
+                      fit: BoxFit.cover,
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: loadingProgress.expectedTotalBytes != null
+                                ? loadingProgress.cumulativeBytesLoaded /
+                                      loadingProgress.expectedTotalBytes!
+                                : null,
+                          ),
+                        );
+                      },
+                      errorBuilder: (context, error, stackTrace) {
+                        return Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.broken_image,
+                                size: 50,
+                                color: Colors.grey,
+                              ),
+                              SizedBox(height: 8),
+                              Text(
+                                'Image not available',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 12,
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                SizedBox(height: 10),
+                Text(
+                  documentSnapshot['name'],
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 5),
+                Row(
+                  children: [
+                    Icon(Iconsax.flash_1, size: 16, color: Colors.grey),
+                    Text(
+                      ' ${documentSnapshot['calo']} Calo',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Text(
+                      " • ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Icon(Iconsax.clock, size: 16, color: Colors.grey),
+                    const SizedBox(width: 5),
+                    Text(
+                      ' ${documentSnapshot['time']} Min',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            // for favorite button
+            Positioned(
+              top: 5,
+              right: 5,
+              child: CircleAvatar(
+                radius: 18,
+                backgroundColor: Colors.white,
+                child: InkWell(
+                  onTap: () {},
+                  child: const Icon(
+                    Iconsax.heart,
+                    size: 20,
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
-            SizedBox(height: 10), 
-            Text(documentSnapshot['name'], style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),),
-              SizedBox(height: 5),
-            Row(
-              children: [
-                Icon(
-                  Iconsax.flash_1,
-                  size: 16,
-                  color: Colors.grey,
-                ),
-              ],
-            )
           ],
         ),
-      )
+      ),
     );
   }
 }

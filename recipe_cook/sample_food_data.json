@@ -1,0 +1,87 @@
+[
+  {
+    "name": "Pancakes",
+    "category": "Breakfast",
+    "calo": "250",
+    "time": 15,
+    "rating": 4.7,
+    "reviews": 45,
+    "image": "https://www.onceuponachef.com/images/2009/08/Buttermilk-Pancakes.jpg",
+    "ingredientsName": ["Flour", "Milk", "Eggs", "Sugar"],
+    "ingredientsAmount": ["200", "250", "2", "30"],
+    "ingredientsImage": [
+      "https://tse3.mm.bing.net/th/id/OIP.7kGXqLZKqyQVhY9Z_p3bkgHaE8?rs=1&pid=ImgDetMain",
+      "https://tse1.mm.bing.net/th/id/OIP.DYjKlvV_hVHJQGvqJqE1EgHaE8?rs=1&pid=ImgDetMain",
+      "https://tse2.mm.bing.net/th/id/OIP.mPPuJYrLKjQsqGqVHqM5QwHaE8?rs=1&pid=ImgDetMain",
+      "https://tse3.mm.bing.net/th/id/OIP.Yp2qP5vE7gp3KvIBVNLBQAHaE7?rs=1&pid=ImgDetMain"
+    ]
+  },
+  {
+    "name": "Caesar Salad",
+    "category": "Lunch",
+    "calo": "180",
+    "time": 12,
+    "rating": 4.3,
+    "reviews": 32,
+    "image": "https://tse2.mm.bing.net/th/id/OIP.zJP5hGCE_h3kWXQoQ0GHvQHaLH?rs=1&pid=ImgDetMain",
+    "ingredientsName": ["Lettuce", "Chicken", "Parmesan", "Dressing"],
+    "ingredientsAmount": ["150", "100", "30", "50"],
+    "ingredientsImage": [
+      "https://tse4.mm.bing.net/th/id/OIP.vXGvDjWKyQGJ7n8qBQV8aAHaE8?rs=1&pid=ImgDetMain",
+      "https://tse3.mm.bing.net/th/id/OIP.qpGOYvJ8YDJrKvVt3kZGjgHaE8?rs=1&pid=ImgDetMain",
+      "https://tse2.mm.bing.net/th/id/OIP.M8vVQy_cQ7xFJGQqV8LzJgHaE7?rs=1&pid=ImgDetMain",
+      "https://tse1.mm.bing.net/th/id/OIP.R3qQXYvP7mJGVQq8P5kVQAHaE8?rs=1&pid=ImgDetMain"
+    ]
+  },
+  {
+    "name": "Spaghetti Carbonara",
+    "category": "Dinner",
+    "calo": "450",
+    "time": 25,
+    "rating": 4.8,
+    "reviews": 67,
+    "image": "https://tse4.mm.bing.net/th/id/OIP.cLHrJ5vQ8qGXQpV7kZMpQAHaLH?rs=1&pid=ImgDetMain",
+    "ingredientsName": ["Spaghetti", "Bacon", "Eggs", "Parmesan"],
+    "ingredientsAmount": ["200", "100", "3", "50"],
+    "ingredientsImage": [
+      "https://tse1.mm.bing.net/th/id/OIP.Y7KqP5vE_qJGVQp8L5kZQgHaE8?rs=1&pid=ImgDetMain",
+      "https://tse2.mm.bing.net/th/id/OIP.qLHrJ5vQ8qGXQpV7kZMpQAHaLH?rs=1&pid=ImgDetMain",
+      "https://tse2.mm.bing.net/th/id/OIP.mPPuJYrLKjQsqGqVHqM5QwHaE8?rs=1&pid=ImgDetMain",
+      "https://tse2.mm.bing.net/th/id/OIP.M8vVQy_cQ7xFJGQqV8LzJgHaE7?rs=1&pid=ImgDetMain"
+    ]
+  },
+  {
+    "name": "Greek Yogurt Bowl",
+    "category": "Breakfast",
+    "calo": "200",
+    "time": 5,
+    "rating": 4.6,
+    "reviews": 53,
+    "image": "https://tse3.mm.bing.net/th/id/OIP.pKqJ7vQ9qJXVQp8M5kZQgHaLH?rs=1&pid=ImgDetMain",
+    "ingredientsName": ["Greek Yogurt", "Honey", "Berries", "Granola"],
+    "ingredientsAmount": ["200", "20", "100", "50"],
+    "ingredientsImage": [
+      "https://tse4.mm.bing.net/th/id/OIP.zLHrJ5vQ8qGXQpV7kZMpQAHaLH?rs=1&pid=ImgDetMain",
+      "https://tse1.mm.bing.net/th/id/OIP.yKqP5vE_qJGVQp8L5kZQgHaE8?rs=1&pid=ImgDetMain",
+      "https://tse2.mm.bing.net/th/id/OIP.xLHrJ5vQ8qGXQpV7kZMpQAHaLH?rs=1&pid=ImgDetMain",
+      "https://tse3.mm.bing.net/th/id/OIP.wKqP5vE_qJGVQp8L5kZQgHaE8?rs=1&pid=ImgDetMain"
+    ]
+  },
+  {
+    "name": "Grilled Salmon",
+    "category": "Dinner",
+    "calo": "380",
+    "time": 20,
+    "rating": 4.9,
+    "reviews": 78,
+    "image": "https://tse2.mm.bing.net/th/id/OIP.tLHrJ5vQ8qGXQpV7kZMpQAHaLH?rs=1&pid=ImgDetMain",
+    "ingredientsName": ["Salmon", "Lemon", "Olive Oil", "Herbs"],
+    "ingredientsAmount": ["200", "1", "15", "10"],
+    "ingredientsImage": [
+      "https://tse3.mm.bing.net/th/id/OIP.sKqP5vE_qJGVQp8L5kZQgHaE8?rs=1&pid=ImgDetMain",
+      "https://tse4.mm.bing.net/th/id/OIP.rLHrJ5vQ8qGXQpV7kZMpQAHaLH?rs=1&pid=ImgDetMain",
+      "https://tse1.mm.bing.net/th/id/OIP.qKqP5vE_qJGVQp8L5kZQgHaE8?rs=1&pid=ImgDetMain",
+      "https://tse2.mm.bing.net/th/id/OIP.pLHrJ5vQ8qGXQpV7kZMpQAHaLH?rs=1&pid=ImgDetMain"
+    ]
+  }
+]
