@@ -47,6 +47,7 @@ class _ViewAllItemsState extends State<ViewAllItems> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const SizedBox(height: 10),
             StreamBuilder<QuerySnapshot>(
               stream: completeApp.snapshots(),
               builder: (context, snapshot) {
