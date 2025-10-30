@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:recipe_cook/Untils/constants.dart';
 import 'package:recipe_cook/Provider/favorite_provider.dart';
 
@@ -70,17 +71,79 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(20),
                                     image: DecorationImage(
+                                      fit: BoxFit.cover,
                                       image: NetworkImage(
                                         favoriteItem['image'],
                                       ),
-                                      fit: BoxFit.cover,
                                     ),
                                   ),
                                 ),
+                                const SizedBox(width: 10),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      favoriteItem['name'], 
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold, 
+                                        fontSize: 16,
+                                      ),
+                                    ),
+                                    SizedBox(height: 15,),
+                                    Row(
+                  children: [
+                    Icon(Iconsax.flash_1, size: 16, color: Colors.grey),
+                    Text(
+                      ' ${favoriteItem['calo']} Calo',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Text(
+                      " • ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    Icon(Iconsax.clock, size: 16, color: Colors.grey),
+                    const SizedBox(width: 5),
+                    Text(
+                      ' ${favoriteItem['time']} Min',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 12,
+                        color: Colors.grey,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                           ),
                         ),
+                        // cho nút xóa
+                        Positioned(
+                          top: 50,
+                          right: 35,
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                provider.toggleFavoriteStatus(snapshot.data!);
+                              });
+                            },
+                            child: const Icon(
+                              Icons.delete, 
+                              color: Colors.red, 
+                              size:25
+                            ),
+                          ),
+                        )
                       ],
                     );
                   },

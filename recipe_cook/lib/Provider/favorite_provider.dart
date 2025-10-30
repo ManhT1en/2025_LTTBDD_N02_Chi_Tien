@@ -59,4 +59,6 @@ class FavoriteProvider extends ChangeNotifier {
   static FavoriteProvider of(BuildContext context, {bool listen = true}) {
     return Provider.of(context, listen: listen);
   }
+
+  void toggleFavorite(DocumentSnapshot<Map<String, dynamic>> favoriteItem) {}
 }
