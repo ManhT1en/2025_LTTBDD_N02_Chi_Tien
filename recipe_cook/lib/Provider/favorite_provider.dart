@@ -31,7 +31,7 @@ class FavoriteProvider extends ChangeNotifier {
         'isFavorite': true,
       });
     } catch (e) {
-      print('da co loi khi them mon an ua thich: $e');
+      print('Đã có lỗi khi xóa món ăn yêu thích: $e');
     }
   }
 
@@ -39,7 +39,7 @@ class FavoriteProvider extends ChangeNotifier {
     try {
       await _firestore.collection('userFavorites').doc(productId).delete();
     } catch (e) {
-      print('da co loi khi xoa mon an ua thich: $e');
+      print('Đã có lỗi khi xóa món ăn yêu thích: $e');
     }
   }
 
@@ -51,7 +51,7 @@ class FavoriteProvider extends ChangeNotifier {
       _favoriteIds = snapshot.docs.map((doc) => doc.id).toList();
       notifyListeners();
     } catch (e) {
-      print('da co loi khi tai danh sach mon an ua thich: $e');
+      print('Đã có lỗi khi tải danh sách món ăn yêu thích: $e');
     }
     notifyListeners();
   }

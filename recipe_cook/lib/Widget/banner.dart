@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_cook/Untils/constants.dart';
+import 'package:recipe_cook/l10n/app_localizations.dart';
 
 class BannertoExplore extends StatelessWidget {
   const BannertoExplore({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     return Container(
       width: double.infinity,
       height: 170,
@@ -24,9 +26,11 @@ class BannertoExplore extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Nấu những món ngon nhất với công thức chuẩn tại nhà',
-                  style: TextStyle(
+                Text(
+                  localizations.translate('banner_text'),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
                     height: 1.1,
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
@@ -41,9 +45,9 @@ class BannertoExplore extends StatelessWidget {
                     elevation: 0,
                   ),
                   onPressed: () {},
-                  child: const Text(
-                    'Khám phá',
-                    style: TextStyle(
+                  child: Text(
+                    localizations.translate('explore'),
+                    style: const TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.bold,
                       color: Colors.black,
