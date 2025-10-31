@@ -71,7 +71,7 @@ class ImportData {
           "image":
               "https://images.unsplash.com/photo-1541519227354-08fa5d50c44d?w=500",
           "ingredientsName": ["Avocado", "Bread", "Eggs", "Salt"],
-          "ingredientsAmount": ["1", "2", "1", "5"],
+          "ingredientsAmount": ["100", "200", "100", "5"],
           "ingredientsImage": [
             "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=200",
             "https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200",

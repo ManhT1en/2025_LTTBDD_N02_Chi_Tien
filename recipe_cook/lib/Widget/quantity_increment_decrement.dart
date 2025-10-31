@@ -23,7 +23,7 @@ class QuantityIncrementDecrement extends StatelessWidget {
         borderRadius: BorderRadius.circular(25), 
       ),
       child: Row(
-        mainAxisSize: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(
             onPressed: onRemove, 

@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import 'package:recipe_cook/Provider/favorite_provider.dart';
+import 'package:recipe_cook/Provider/quantity.dart';
 import 'package:recipe_cook/Untils/constants.dart';
 import 'package:recipe_cook/Widget/my_icon_button.dart';
+import 'package:recipe_cook/Widget/quantity_increment_decrement.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final DocumentSnapshot<Object?>
@@ -18,11 +21,22 @@ class RecipeDetailScreen extends StatefulWidget {
       _RecipeDetailScreenState();
 }
 
-class _RecipeDetailScreenState
-    extends State<RecipeDetailScreen> {
+class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
+  @override
+  void initState() {
+
+// Khởi tạo (lưu lại) lượng nguyên liệu gốc vào Provider
+List<double> baseAmounts = widget.documentSnapshot['ingredientsAmount']
+    .map<double>((amount) => double.parse(amount.toString(),),)
+    .toList();
+    Provider.of<QuantityProvider>(context, listen: false)
+    .setBaseIngredientAmounts(baseAmounts);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final provider = FavoriteProvider.of(context);
+    final quantityProvider = Provider.of<QuantityProvider>(context);
     return Scaffold(
       floatingActionButtonLocation:
           FloatingActionButtonLocation
@@ -223,9 +237,78 @@ class _RecipeDetailScreenState
                           ),
                         ],
                       ),
-                      Spacer(),
+                      const Spacer(),
+                      QuantityIncrementDecrement(
+                        currentNumber: quantityProvider.currentNumber, 
+                        onAdd: ()=> quantityProvider.increaseQuantity(), 
+                        onRemove: ()=> quantityProvider.decreaseQuantity(),
+                      )
                     ],
                   ),
+                  const SizedBox(height: 10),
+                  // Danh sach nguyen lieu
+                  Column(children: [Row (children: [
+                    // anh thanh phan
+                    Column(
+                      children: widget
+                      .documentSnapshot['ingredientsImage']
+                      .map<Widget>((imageUrl) => Container(
+                        height: 60, 
+                        width: 60,
+                        margin: const EdgeInsets.only(bottom: 10),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(imageUrl),
+                                  ),
+                                ),
+                              ),
+                            ).toList(),
+                          ),
+                    const SizedBox(width: 20),
+                    // ten nguyen lieu
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: widget
+                      .documentSnapshot['ingredientsName']
+                      .map<Widget>((ingredient) => SizedBox(
+                        height: 60, 
+                        child: Center(
+                          child: Text(
+                            ingredient, 
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey.shade400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ).toList(),
+                          ),
+                    // so luong nguyen lieu
+                    const Spacer()
+                    Column(
+                      children: quantityProvider.updateIngredientAmounts
+                      .map<Widget>((amount) => SizedBox(
+                        height: 60, 
+                        child: Center(
+                          child: Text(
+                            "${amount}gm", 
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey.shade400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ).toList(),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 40),
                 ],
               ),
             ),

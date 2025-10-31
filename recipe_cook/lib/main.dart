@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:recipe_cook/Provider/quantity.dart';
 import 'firebase_options.dart';
 import 'Views/app_main_screen.dart';
 import 'Provider/favorite_provider.dart';
@@ -17,7 +18,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => FavoriteProvider())],
+      providers: [
+        // cho san pham yeu thich
+        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
+        // cho so luong nguyen lieu
+        ChangeNotifierProvider(create: (_) => QuantityProvider()),
+      ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         home: AppMainScreen(),
