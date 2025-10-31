@@ -287,7 +287,7 @@ List<double> baseAmounts = widget.documentSnapshot['ingredientsAmount']
                             ).toList(),
                           ),
                     // so luong nguyen lieu
-                    const Spacer()
+                    const Spacer(),
                     Column(
                       children: quantityProvider.updateIngredientAmounts
                       .map<Widget>((amount) => SizedBox(

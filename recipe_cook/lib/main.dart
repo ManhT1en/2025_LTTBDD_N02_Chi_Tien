@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:recipe_cook/Provider/quantity.dart';
 import 'firebase_options.dart';
 import 'Views/app_main_screen.dart';
+import 'Views/team_intro_screen.dart';
 import 'Provider/favorite_provider.dart';
 
 void main() async {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: AppMainScreen(),
+        home: TeamIntroScreen(),
       ),
     );
   }
