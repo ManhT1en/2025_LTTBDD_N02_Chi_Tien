@@ -6,6 +6,8 @@ import 'package:recipe_cook/Views/view_all_items.dart';
 import 'package:recipe_cook/Widget/banner.dart';
 import 'package:recipe_cook/Widget/food_items_display.dart';
 import 'package:recipe_cook/Widget/my_icon_button.dart';
+import 'package:recipe_cook/Widget/theme_switcher.dart';
+import 'package:recipe_cook/l10n/app_localizations.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyAppHomeScreen extends StatefulWidget {
@@ -20,8 +22,8 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
   bool _showImportButton = false; // nút dùng để import data
 
   // cho category
-  final CollectionReference categoriesItems = 
-      FirebaseFirestore.instance.collection("App-Category");
+  final CollectionReference categoriesItems = FirebaseFirestore.instance
+      .collection("App-Category");
   // Hiển thị tất cả các món
   Query get filteredRecipes => FirebaseFirestore.instance
       .collection("Recipe-cook-app")
@@ -32,7 +34,7 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: kbackgroundcolor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -48,11 +50,11 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
                     mySearchBar(),
                     //for banner
                     const BannertoExplore(),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
                       child: Text(
-                        "Categories",
-                        style: TextStyle(
+                        AppLocalizations.of(context).categories,
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -64,10 +66,38 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           final docs = snapshot.data!.docs;
+                          final localizations = AppLocalizations.of(context);
                           return Wrap(
                             spacing: 10,
                             children: docs.map((doc) {
                               final isSelected = category == doc['name'];
+                              final categoryName = doc['name'] as String;
+                              // Translate category name
+                              String translatedName;
+                              switch (categoryName.toLowerCase()) {
+                                case 'all':
+                                  translatedName = localizations.translate(
+                                    'all',
+                                  );
+                                  break;
+                                case 'breakfast':
+                                  translatedName = localizations.translate(
+                                    'breakfast',
+                                  );
+                                  break;
+                                case 'lunch':
+                                  translatedName = localizations.translate(
+                                    'lunch',
+                                  );
+                                  break;
+                                case 'dinner':
+                                  translatedName = localizations.translate(
+                                    'dinner',
+                                  );
+                                  break;
+                                default:
+                                  translatedName = categoryName;
+                              }
                               return GestureDetector(
                                 onTap: () {
                                   setState(() {
@@ -82,18 +112,24 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
                                   decoration: BoxDecoration(
                                     color: isSelected
                                         ? kprimaryColor
-                                        : Colors.white,
+                                        : Theme.of(context).cardColor,
                                     borderRadius: BorderRadius.circular(20),
                                     border: Border.all(
-                                      color: Colors.grey.shade300,
+                                      color:
+                                          Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Colors.grey.shade700
+                                          : Colors.grey.shade300,
                                     ),
                                   ),
                                   child: Text(
-                                    doc['name'],
+                                    translatedName,
                                     style: TextStyle(
                                       color: isSelected
                                           ? Colors.white
-                                          : Colors.black,
+                                          : Theme.of(
+                                              context,
+                                            ).textTheme.bodyLarge?.color,
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
@@ -109,9 +145,9 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          "Nhanh và Dễ",
-                          style: TextStyle(
+                        Text(
+                          AppLocalizations.of(context).quickEasy,
+                          style: const TextStyle(
                             fontSize: 20,
                             letterSpacing: 0.1,
                             fontWeight: FontWeight.bold,
@@ -126,9 +162,9 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
                               ),
                             );
                           },
-                          child: const Text(
-                            "Xem tất cả",
-                            style: TextStyle(
+                          child: Text(
+                            AppLocalizations.of(context).viewAll,
+                            style: const TextStyle(
                               color: kBannerColor,
                               fontWeight: FontWeight.w600,
                             ),
@@ -149,6 +185,7 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
       floatingActionButton: _showImportButton
           ? FloatingActionButton.extended(
               onPressed: () async {
+                final localizations = AppLocalizations.of(context);
                 // Show loading dialog
                 showDialog(
                   context: context,
@@ -162,7 +199,7 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
                           children: [
                             CircularProgressIndicator(),
                             SizedBox(height: 16),
-                            Text('Đang import dữ liệu...'),
+                            Text(localizations.translate('importing_data')),
                           ],
                         ),
                       ),
@@ -184,14 +221,18 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
                 // Show success message
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('✅ Import dữ liệu thành công!'),
+                    content: Text(
+                      '✅ ${localizations.translate('import_success')}',
+                    ),
                     backgroundColor: Colors.green,
                     duration: Duration(seconds: 3),
                   ),
                 );
               },
               icon: Icon(Icons.upload),
-              label: Text('Import Data'),
+              label: Text(
+                AppLocalizations.of(context).translate('import_data'),
+              ),
               backgroundColor: kprimaryColor,
             )
           : null,
@@ -199,6 +240,7 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
   }
 
   StreamBuilder<QuerySnapshot<Object?>> selectedCategory() {
+    final localizations = AppLocalizations.of(context);
     return StreamBuilder(
       stream: selectedRecipes.snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -206,13 +248,17 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
           return Center(child: CircularProgressIndicator());
         }
         if (snapshot.hasError) {
-          return Center(child: Text('Lỗi tải dữ liệu'));
+          return Center(
+            child: Text(localizations.translate('error_loading_data')),
+          );
         }
         final List<DocumentSnapshot> recipes = snapshot.data?.docs ?? [];
         if (recipes.isEmpty) {
           return Padding(
             padding: EdgeInsets.symmetric(vertical: 20),
-            child: Center(child: Text('Không có món ăn nào trong mục này')),
+            child: Center(
+              child: Text(localizations.translate('no_items_in_category')),
+            ),
           );
         }
         return Padding(
@@ -233,6 +279,7 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
   }
 
   Padding mySearchBar() {
+    final localizations = AppLocalizations.of(context);
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 22),
       child: TextField(
@@ -241,7 +288,7 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
           prefixIcon: const Icon(Iconsax.search_normal),
           fillColor: Colors.white,
           border: InputBorder.none,
-          hintText: "bạn muốn ăn gì hôm nay?",
+          hintText: localizations.searchPlaceholder,
           hintStyle: TextStyle(color: Colors.grey),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
@@ -257,17 +304,20 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
   }
 
   Row headerParts() {
+    final localizations = AppLocalizations.of(context);
     return Row(
       children: [
-        const Text(
-          "Hôm nay bạn muốn nấu gì",
-          style: TextStyle(
+        Text(
+          localizations.whatCookToday,
+          style: const TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.bold,
             height: 1,
           ),
         ),
         const Spacer(),
+        const ThemeSwitcher(), // Dark mode toggle
+        const SizedBox(width: 8),
         MyIconButton(icon: Iconsax.notification, pressed: () {}),
       ],
     );

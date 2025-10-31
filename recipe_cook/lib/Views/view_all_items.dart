@@ -4,6 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:recipe_cook/Untils/constants.dart';
 import 'package:recipe_cook/Widget/food_items_display.dart';
 import 'package:recipe_cook/Widget/my_icon_button.dart';
+import 'package:recipe_cook/l10n/app_localizations.dart';
 
 class ViewAllItems extends StatefulWidget {
   const ViewAllItems({super.key});
@@ -18,10 +19,11 @@ class _ViewAllItemsState extends State<ViewAllItems> {
   );
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     return Scaffold(
-      backgroundColor: kbackgroundcolor,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: kbackgroundcolor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         automaticallyImplyLeading: false, // it removes the appbar back button
         elevation: 0,
         actions: [
@@ -34,7 +36,7 @@ class _ViewAllItemsState extends State<ViewAllItems> {
           ),
           Spacer(),
           Text(
-            "nhanh va de dang",
+            localizations.quickEasy,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Spacer(),
@@ -55,10 +57,18 @@ class _ViewAllItemsState extends State<ViewAllItems> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 if (snapshot.hasError) {
-                  return Center(child: Text('Lỗi: ${snapshot.error}'));
+                  return Center(
+                    child: Text(
+                      '${localizations.translate('error')}: ${snapshot.error}',
+                    ),
+                  );
                 }
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                  return const Center(child: Text('Chưa có dữ liệu'));
+                  return Center(
+                    child: Text(
+                      localizations.translate('no_items_in_category'),
+                    ),
+                  );
                 }
 
                 final docs = snapshot.data!.docs;

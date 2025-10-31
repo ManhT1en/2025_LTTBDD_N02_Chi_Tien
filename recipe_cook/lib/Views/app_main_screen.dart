@@ -3,6 +3,9 @@ import 'package:iconsax/iconsax.dart';
 import 'package:recipe_cook/Untils/constants.dart';
 import 'package:recipe_cook/Views/my_app_home_screen.dart';
 import 'package:recipe_cook/Views/favorite_screen.dart';
+import 'package:recipe_cook/Views/settings_screen.dart';
+import 'package:recipe_cook/Views/meal_plan_screen.dart';
+import 'package:recipe_cook/l10n/app_localizations.dart';
 
 class AppMainScreen extends StatefulWidget {
   const AppMainScreen({super.key});
@@ -19,18 +22,19 @@ class _AppMainScreenState extends State<AppMainScreen> {
     page = [
       const MyAppHomeScreen(),
       const FavoriteScreen(),
-      navBarPage(Iconsax.calendar5),
-      navBarPage(Iconsax.setting_21),
+      const MealPlanScreen(),
+      const SettingsScreen(),
     ];
 
     super.initState();
   }
 
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).cardColor,
         elevation: 0,
         iconSize: 28,
         currentIndex: selectedIndex,
@@ -53,23 +57,23 @@ class _AppMainScreenState extends State<AppMainScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(selectedIndex == 0 ? Iconsax.home5 : Iconsax.home_1),
-            label: "Home",
+            label: localizations.translate('nav_home'),
           ),
           BottomNavigationBarItem(
             icon: Icon(selectedIndex == 1 ? Iconsax.heart5 : Iconsax.heart),
-            label: "Favorite",
+            label: localizations.translate('nav_favorite'),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               selectedIndex == 2 ? Iconsax.calendar5 : Iconsax.calendar,
             ),
-            label: "Meal Plan",
+            label: localizations.translate('nav_meal_plan'),
           ),
           BottomNavigationBarItem(
             icon: Icon(
               selectedIndex == 3 ? Iconsax.setting_21 : Iconsax.setting_2,
             ),
-            label: "Settings",
+            label: localizations.translate('nav_settings'),
           ),
         ],
       ),

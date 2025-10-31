@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:recipe_cook/Provider/favorite_provider.dart';
+import 'package:recipe_cook/Untils/page_transitions.dart';
 import 'package:recipe_cook/Views/recipe_detail_screen.dart';
+import 'package:recipe_cook/Widget/animated_favorite_button.dart';
 
 class FoodItemsDisplay extends StatelessWidget {
   final DocumentSnapshot<Object?> documentSnapshot;
@@ -13,7 +15,10 @@ class FoodItemsDisplay extends StatelessWidget {
     final provider = FavoriteProvider.of(context);
     return GestureDetector(
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => RecipeDetailScreen(documentSnapshot: documentSnapshot)
+        Navigator.push(
+          context,
+          ScaleRoute(
+            page: RecipeDetailScreen(documentSnapshot: documentSnapshot),
           ),
         );
       },
@@ -114,27 +119,21 @@ class FoodItemsDisplay extends StatelessWidget {
                   ),
                 ],
               ),
-        
-              // for favorite button
+
+              // for favorite button with animation
               Positioned(
                 top: 5,
                 right: 5,
                 child: CircleAvatar(
                   radius: 18,
                   backgroundColor: Colors.white,
-                  child: InkWell(
+                  child: AnimatedFavoriteButton(
+                    isFavorite: provider.isExist(documentSnapshot),
                     onTap: () {
                       provider.toggleFavoriteStatus(documentSnapshot);
                     },
-                    child: Icon(
-                      provider.isExist(documentSnapshot)
-                          ? Iconsax.heart5
-                          : Iconsax.heart,
-                      size: 20,
-                      color: provider.isExist(documentSnapshot)
-                          ? Colors.red
-                          : Colors.black,
-                    ),
+                    activeColor: Colors.red,
+                    inactiveColor: Colors.black,
                   ),
                 ),
               ),
