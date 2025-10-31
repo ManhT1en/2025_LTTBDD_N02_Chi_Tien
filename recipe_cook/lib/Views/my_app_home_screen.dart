@@ -307,15 +307,19 @@ class _MyAppHomeScreenState extends State<MyAppHomeScreen> {
     final localizations = AppLocalizations.of(context);
     return Row(
       children: [
-        Text(
-          localizations.whatCookToday,
-          style: const TextStyle(
-            fontSize: 32,
-            fontWeight: FontWeight.bold,
-            height: 1,
+        Expanded(
+          child: Text(
+            localizations.whatCookToday,
+            style: const TextStyle(
+              fontSize: 32,
+              fontWeight: FontWeight.bold,
+              height: 1,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
-        const Spacer(),
+        const SizedBox(width: 8),
         const ThemeSwitcher(), // Dark mode toggle
         const SizedBox(width: 8),
         MyIconButton(icon: Iconsax.notification, pressed: () {}),
