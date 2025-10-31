@@ -27,7 +27,7 @@ class TeamIntroScreen extends StatelessWidget {
                   children: [
                     _buildTeamMember(
                       name: 'Hoàng Thị Linh Chi',
-                      studentId: 'MSSV: 2021003',                    
+                      studentId: 'MSSV: 22010099',
                     ),
                     const SizedBox(height: 20),
                     _buildTeamMember(
@@ -76,10 +76,7 @@ class TeamIntroScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildTeamMember({
-    required String name,
-    required String studentId,
-  }) {
+  Widget _buildTeamMember({required String name, required String studentId}) {
     return Container(
       padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
