@@ -158,9 +158,8 @@ class _FavoriteScreenState
                                                 .flash_1,
                                             size:
                                                 16,
-                                            color: Theme.of(
-                                              context,
-                                            ).hintColor,
+                                            color:
+                                                Theme.of(context).hintColor,
                                           ),
                                           Text(
                                             ' ${favoriteItem['calo']} Calo',
@@ -169,9 +168,8 @@ class _FavoriteScreenState
                                                   FontWeight.bold,
                                               fontSize:
                                                   12,
-                                              color: Theme.of(
-                                                context,
-                                              ).hintColor,
+                                              color:
+                                                  Theme.of(context).hintColor,
                                             ),
                                           ),
                                           Text(
@@ -181,9 +179,8 @@ class _FavoriteScreenState
                                                   FontWeight.bold,
                                               fontSize:
                                                   12,
-                                              color: Theme.of(
-                                                context,
-                                              ).hintColor,
+                                              color:
+                                                  Theme.of(context).hintColor,
                                             ),
                                           ),
                                           Icon(
@@ -191,9 +188,8 @@ class _FavoriteScreenState
                                                 .clock,
                                             size:
                                                 16,
-                                            color: Theme.of(
-                                              context,
-                                            ).hintColor,
+                                            color:
+                                                Theme.of(context).hintColor,
                                           ),
                                           const SizedBox(
                                             width:
@@ -206,9 +202,8 @@ class _FavoriteScreenState
                                                   FontWeight.bold,
                                               fontSize:
                                                   12,
-                                              color: Theme.of(
-                                                context,
-                                              ).hintColor,
+                                              color:
+                                                  Theme.of(context).hintColor,
                                             ),
                                           ),
                                         ],
