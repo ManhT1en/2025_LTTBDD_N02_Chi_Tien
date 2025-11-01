@@ -359,17 +359,25 @@ class _MyAppHomeScreenState
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 22),
       child: TextField(
+        style: TextStyle(
+          color: Theme.of(
+            context,
+          ).textTheme.bodyLarge?.color,
+        ),
         decoration: InputDecoration(
           filled: true,
-          prefixIcon: const Icon(
+          prefixIcon: Icon(
             Iconsax.search_normal,
+            color: Theme.of(
+              context,
+            ).iconTheme.color,
           ),
-          fillColor: Colors.white,
+          fillColor: Theme.of(context).cardColor,
           border: InputBorder.none,
           hintText:
               localizations.searchPlaceholder,
           hintStyle: TextStyle(
-            color: Colors.grey,
+            color: Theme.of(context).hintColor,
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(
