@@ -20,6 +20,7 @@ class _ViewAllItemsState extends State<ViewAllItems> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
@@ -37,7 +38,11 @@ class _ViewAllItemsState extends State<ViewAllItems> {
           Spacer(),
           Text(
             localizations.quickEasy,
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: isDark ? Colors.white : Colors.black,
+            ),
           ),
           Spacer(),
           MyIconButton(icon: Iconsax.notification, pressed: () {}),
@@ -83,6 +88,8 @@ class _ViewAllItemsState extends State<ViewAllItems> {
                   ),
                   itemBuilder: (context, index) {
                     final DocumentSnapshot doc = docs[index];
+                    final isDark =
+                        Theme.of(context).brightness == Brightness.dark;
                     return Column(
                       children: [
                         FoodItemsDisplay(documentSnapshot: doc),
@@ -95,15 +102,25 @@ class _ViewAllItemsState extends State<ViewAllItems> {
                             const SizedBox(width: 5),
                             Text(
                               doc['rating'].toString(),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
+                                color: isDark ? Colors.white : Colors.black87,
                               ),
                             ),
-                            const Text('/5'),
+                            Text(
+                              '/5',
+                              style: TextStyle(
+                                color: isDark ? Colors.white70 : Colors.black54,
+                              ),
+                            ),
                             const SizedBox(width: 5),
                             Text(
                               '(${doc['reviews']} Reviews)',
-                              style: const TextStyle(color: Colors.grey),
+                              style: TextStyle(
+                                color: isDark
+                                    ? Colors.grey[400]
+                                    : Colors.grey[600],
+                              ),
                             ),
                           ],
                         ),
